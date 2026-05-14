@@ -1,0 +1,10 @@
+# MCP configuration files
+#mcp.json
+# Local History folder (common in VS Code extensions)
+.history/
+# The ignore file itself
+#.gitignore
+# .sfdx modules and configuration files
+.sfdx/
+# local Claude configuration files
+#CLAUDE.local.md
