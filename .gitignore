@@ -7,4 +7,6 @@ mcp.json
 # .sfdx modules and configuration files
 .sfdx/
 # local Claude configuration files
-#CLAUDE.local.md
+CLAUDE.local.md
+# Local environment variable files
+*.DS_Store
