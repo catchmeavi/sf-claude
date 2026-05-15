@@ -1,6 +1,6 @@
 # Salesforce Project
 
-This repository follows the Salesforce DX (SFDX) project structure, enhanced with a robust `.claude` configuration for AI agent orchestration.
+This repository follows the Salesforce DX (SFDX) project structure, enhanced with a robust `.claude` configuration for AI agent orchestration and Agentforce development.
 
 ## Project Structure
 
@@ -9,7 +9,7 @@ my-salesforce-project/
 ├── .claude/                            # The Claude configuration
 │   ├── settings.json                   # Overrides global settings
 │   ├── settings.local.json             # Local overrides (Git Ignored)
-│   ├── rules/                          # Rules loaded for specific file patterns
+│   ├── rules/                          # Rules for specific file patterns
 │   ├── command/                        # Commands to execute predefined tasks
 │   │   ├── sf-agent-prompt.md
 │   │   ├── sf-agent-topic.md
@@ -22,7 +22,7 @@ my-salesforce-project/
 │   │   ├── sf-integration.md
 │   │   ├── sf-security.md
 │   │   └── sf-soql-query.md
-│   └── skills/                          # The skills required by the agents
+│   └── skill/                          # Agent skills and logic
 │       ├── agent-script/
 │       │   └── SKILL.md
 │       ├── apex-lint/
@@ -40,11 +40,18 @@ my-salesforce-project/
 ├── force-app/                          # Main Salesforce metadata
 │   └── main/
 │       └── default/
-│           ├── classes/
-│           ├── objects/
-│           ├── triggers/
-│           ├── lwc/
-│           └── ...
+│           ├── agents/                 # Agentforce Agents
+│           ├── bots/                   # Einstein Bots
+│           ├── classes/                # Apex Classes
+│           ├── flowDefinitions/        # Flow Definition metadata
+│           ├── flows/                  # Salesforce Flows
+│           ├── genAiFunctions/         # Generative AI Functions
+│           ├── genAiPlannerBundles/    # Planner configurations
+│           ├── genAiPlugins/           # AI Plugins
+│           ├── genAiPromptTemplates/   # Prompt Builder templates
+│           ├── lightningTypes/         # Custom Lightning types
+│           ├── lwc/                    # Lightning Web Components
+│           └── messagingChannels/      # Service Cloud Messaging
 ├── docs/                               # Architecture & design docs
 ├── CLAUDE.md                           # Essential: Instructions & rules for Claude
 └── README.md
