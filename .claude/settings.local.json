@@ -1,0 +1,14 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(sf org open*)",
+      "Bash(sf org create scratch*)",
+      "mcp__https___github_com_salesforcecli_mcp__deploy_metadata",
+      "mcp__https___github_com_salesforcecli_mcp__assign_permission_set"
+    ]
+  },
+  "env": {
+    "SF_TARGET_ORG": "dev-scratch",
+    "SF_TARGET_DEV_HUB": "DevHub"
+  }
+}

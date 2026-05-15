@@ -1,0 +1,40 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(sf apex run test*)",
+      "Bash(sf project deploy start*)",
+      "Bash(sf project retrieve start*)",
+      "Bash(sf org list*)",
+      "Bash(sf org display*)",
+      "Bash(sf data query*)",
+      "Bash(sf apex run --file*)",
+      "Bash(npm run test:unit*)",
+      "Bash(find . -name \"*.cls\"*)",
+      "Bash(find . -name \"*.js\"*)",
+      "Bash(grep -r*)",
+      "Read(**)",
+      "mcp__https___github_com_salesforcecli_mcp__get_username",
+      "mcp__https___github_com_salesforcecli_mcp__list_all_orgs",
+      "mcp__https___github_com_salesforcecli_mcp__run_soql_query",
+      "mcp__https___github_com_salesforcecli_mcp__run_apex_test",
+      "mcp__https___github_com_salesforcecli_mcp__retrieve_metadata",
+      "mcp__https___github_com_salesforcecli_mcp__list_code_analyzer_rules",
+      "mcp__https___github_com_salesforcecli_mcp__run_code_analyzer",
+      "mcp__https___github_com_salesforcecli_mcp__guide_lwc_best_practices",
+      "mcp__https___github_com_salesforcecli_mcp__guide_lwc_development",
+      "mcp__https___github_com_salesforcecli_mcp__guide_lds_development",
+      "mcp__https___github_com_salesforcecli_mcp__explore_lds_uiapi"
+    ],
+    "deny": [
+      "Bash(git push --force*)",
+      "Bash(git reset --hard*)",
+      "Bash(rm -rf*)",
+      "Bash(sf org delete*)"
+    ]
+  },
+  "env": {
+    "SF_API_VERSION": "62.0",
+    "SF_DEFAULT_DEV_HUB_USERNAME": "",
+    "NODE_ENV": "development"
+  }
+}
