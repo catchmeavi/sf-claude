@@ -3,18 +3,17 @@
   "salesforcedx-vscode-apex.enable-sobject-refresh-on-startup": false,
   "salesforcedx-vscode-core.show-cli-success-msg": false,
 
-  // Treat all template/skill docs as plain markdown — prevents JS/Apex language servers from analysing code blocks
+  // Remap .cls/.trigger files in template dirs to plaintext so the Apex LS never activates on them
   "files.associations": {
-    ".airules/**": "markdown",
-    ".claude/skills/**": "markdown",
-    ".claude/command/**": "markdown"
+    ".claude/**/*.cls": "plaintext",
+    ".claude/**/*.trigger": "plaintext",
+    ".claude/**/*.apex": "plaintext",
+    ".airules/**/*.cls": "plaintext",
+    ".airules/**/*.trigger": "plaintext"
   },
 
-  // Exclude template dirs completely — this is the only way to stop the Apex LS from parsing .cls inside them
   "files.exclude": {
-    "**/.history": true,
-    "**/.claude": true,
-    "**/.airules": true
+    "**/.history": true
   },
   "files.watcherExclude": {
     "**/.claude/**": true,
@@ -57,16 +56,7 @@
 
   "workbench.colorCustomizations": {
     "statusBar.noFolderBackground": "#4E0C68",
-    "statusBar.noFolderForeground": "#FEFBFF",
-    "activityBar.background": "#410A56",
-    "titleBar.activeBackground": "#DC9EF4",
-    "titleBar.activeForeground": "#2C073B",
-    "titleBar.inactiveBackground": "#410A56",
-    "titleBar.inactiveForeground": "#2C073B",
-    "statusBar.background": "#4E0C68",
-    "statusBar.foreground": "#FEFBFF",
-    "statusBar.debuggingBackground": "#4E0C68",
-    "statusBar.debuggingForeground": "#FEFBFF"
+    "statusBar.noFolderForeground": "#FEFBFF"
   },
   "xml.preferences.showSchemaDocumentationType": "none"
 }
