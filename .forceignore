@@ -1,0 +1,3 @@
+# Ignore Claude skill/command template files — these are docs, not deployable Salesforce metadata
+.claude/
+.airules/

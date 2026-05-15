@@ -1,15 +1,63 @@
 {
+  // Suppress diagnostics for template/skill files — these are Claude instruction docs, not deployable code
+  "salesforcedx-vscode-apex.enable-sobject-refresh-on-startup": false,
+  "salesforcedx-vscode-core.show-cli-success-msg": false,
+
+  // Treat all template/skill docs as plain markdown — prevents JS/Apex language servers from analysing code blocks
+  "files.associations": {
+    ".airules/**": "markdown",
+    ".claude/skills/**": "markdown",
+    ".claude/command/**": "markdown"
+  },
+
+  // Exclude template dirs completely — this is the only way to stop the Apex LS from parsing .cls inside them
+  "files.exclude": {
+    "**/.history": true,
+    "**/.claude": true,
+    "**/.airules": true
+  },
+  "files.watcherExclude": {
+    "**/.claude/**": true,
+    "**/.airules/**": true,
+    "**/.history/**": true,
+    "**/.sfdx/**": true
+  },
+  "search.exclude": {
+    "**/.history": true,
+    "**/.sfdx": true,
+    "**/.claude": true,
+    "**/.airules": true
+  },
+
+  // Exclude template/notes dirs from Apex and ESLint analysis
+  "eslint.workingDirectories": [{ "pattern": "force-app/**" }],
+  "eslint.validate": ["javascript"],
+
+  // Suppress markdown lint warnings in airules
+  "markdownlint.config": {
+    "MD013": false,
+    "MD033": false,
+    "MD041": false
+  },
+  "markdownlint.ignore": [
+    ".airules/**",
+    ".claude/**",
+    ".history/**",
+    "README.md"
+  ],
+
+  // Suppress spell-check in template/skill files
+  "cSpell.ignorePaths": [
+    ".airules",
+    ".claude",
+    ".history",
+    "CLAUDE.md",
+    "CLAUDE.local.md"
+  ],
+
   "workbench.colorCustomizations": {
-    "activityBar.background": "#410A56",
-    "titleBar.activeBackground": "#DC9EF4",
-    "titleBar.activeForeground": "#2C073B",
-    "titleBar.inactiveBackground": "#410A56",
-    "titleBar.inactiveForeground": "#2C073B",
-    "statusBar.background": "#4E0C68",
-    "statusBar.foreground": "#FEFBFF",
-    "statusBar.debuggingBackground": "#4E0C68",
-    "statusBar.debuggingForeground": "#FEFBFF",
     "statusBar.noFolderBackground": "#4E0C68",
     "statusBar.noFolderForeground": "#FEFBFF"
-  }
+  },
+  "xml.preferences.showSchemaDocumentationType": "none"
 }
