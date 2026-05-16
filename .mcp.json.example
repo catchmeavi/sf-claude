@@ -1,0 +1,33 @@
+{
+	"mcpServers": {
+		"https://github.com/salesforcecli/mcp": {
+			"type": "stdio",
+			"command": "node",
+			"args": [
+				"/Users/<your-username>/Library/Application Support/Code/User/globalStorage/salesforce.salesforcedx-agentforce-vibes-2/mcp-ootb/vibes-mcp-wrapper.js",
+				"@salesforce/mcp@latest",
+				"--orgs",
+				"ALLOW_ALL_ORGS",
+				"--toolsets",
+				"all"
+			],
+			"package": "@salesforce/mcp",
+			"version": "latest",
+			"disabled": true
+		},
+		"https://github.com/forcedotcom/mcp-hosted/wiki/available-tools-and-servers#salesforce-api-context": {
+			"type": "streamableHttp",
+			"url": "https://api.salesforce.com/platform/mcp/v1-beta.2/platform/salesforce-api-context",
+			"_sandboxUrl": "https://test.api.salesforce.com/platform/mcp/v1-beta.2/platform/salesforce-api-context",
+			"_note": "Use 'url' for production, '_sandboxUrl' value for sandbox — copy the right one into 'url' in your local .mcp.json",
+			"disabled": true
+		},
+		"https://github.com/forcedotcom/mcp-hosted/wiki/available-tools-and-servers#metadata-experts": {
+			"type": "streamableHttp",
+			"url": "https://api.salesforce.com/platform/mcp/v1-beta.2/platform/metadata-experts",
+			"_sandboxUrl": "https://test.api.salesforce.com/platform/mcp/v1-beta.2/platform/metadata-experts",
+			"_note": "Use 'url' for production, '_sandboxUrl' value for sandbox — copy the right one into 'url' in your local .mcp.json",
+			"disabled": true
+		}
+	}
+}
