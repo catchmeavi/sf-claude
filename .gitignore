@@ -1,5 +1,5 @@
-# MCP configuration files
-mcp.json
+# MCP configuration files — .mcp.json is local-only (sandbox vs production URL differs per developer)
+.mcp.json
 # Local History folder (common in VS Code extensions)
 .history/
 # The ignore file itself
