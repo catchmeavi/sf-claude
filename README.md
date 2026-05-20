@@ -26,11 +26,11 @@ my-salesforce-project/
 ├── .claude/
 │   ├── settings.json               # Shared: allowed commands, MCP permissions, env vars
 │   ├── settings.local.json         # Local only (gitignored): your org alias, personal perms
-│   ├── rules/                       # Supplemental rule sets read by skills
-│       ├── APEX_RULES.md               # Hard rules for Apex (governor limits, security)
-│       ├── MERMAID_DIAGRAMS.md         # Diagram standards
-│       ├── AGENT_SCRIPT.md             # Agent Script recipe conventions
-│       └── README_STRUCTURE.md        # README authoring standards
+│   ├── rules/                      # Supplemental rule sets read by skills
+│       ├── APEX_RULES.md           # Hard rules for Apex (governor limits, security)
+│       ├── MERMAID_DIAGRAMS.md     # Diagram standards
+│       ├── AGENT_SCRIPT.md         # Agent Script recipe conventions
+│       └── README_STRUCTURE.md     # README authoring standards
 │   ├── command/                    # Slash commands — invoke with /command-name
 │   │   ├── sf-agentforce.md        # Agentforce technical design document
 │   │   ├── sf-agent-topic.md       # Agent topic + action specification
