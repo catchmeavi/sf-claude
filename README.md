@@ -8,14 +8,14 @@ This repository is a **reference template** for how a Salesforce DX project shou
 
 Claude Code is most effective when it has context — who it is, what the project does, which rules apply, and which tools it can use. This repo externalises all of that configuration into three layers:
 
-| Layer | File/Folder | Purpose |
-|---|---|---|
-| Identity & rules | `CLAUDE.md` | Persona, coding standards, architectural principles |
-| Project settings | `.claude/settings.json` | Shared permissions, allowed/denied commands, env vars |
+| Layer              | File/Folder                   | Purpose                                                          |
+| ------------------ | ----------------------------- | ---------------------------------------------------------------- |
+| Identity & rules   | `CLAUDE.md`                   | Persona, coding standards, architectural principles              |
+| Project settings   | `.claude/settings.json`       | Shared permissions, allowed/denied commands, env vars            |
 | Developer settings | `.claude/settings.local.json` | Personal org aliases, local-only tool permissions _(gitignored)_ |
-| Skills | `.claude/skills/` | Deep domain logic Claude loads on demand |
-| Commands | `.claude/command/` | Slash commands for repeatable delivery tasks |
-| AI rules | `.airules/` | Additional rule files (Apex, Mermaid, README standards) |
+| Skills             | `.claude/skills/`             | Deep domain logic Claude loads on demand                         |
+| Commands           | `.claude/command/`            | Slash commands for repeatable delivery tasks                     |
+| AI rules           | `.airules/`                   | Additional rule files (Apex, Mermaid, README standards)          |
 
 ---
 
@@ -26,6 +26,11 @@ my-salesforce-project/
 ├── .claude/
 │   ├── settings.json               # Shared: allowed commands, MCP permissions, env vars
 │   ├── settings.local.json         # Local only (gitignored): your org alias, personal perms
+│   ├── rules/                       # Supplemental rule sets read by skills
+│       ├── APEX_RULES.md               # Hard rules for Apex (governor limits, security)
+│       ├── MERMAID_DIAGRAMS.md         # Diagram standards
+│       ├── AGENT_SCRIPT.md             # Agent Script recipe conventions
+│       └── README_STRUCTURE.md        # README authoring standards
 │   ├── command/                    # Slash commands — invoke with /command-name
 │   │   ├── sf-agentforce.md        # Agentforce technical design document
 │   │   ├── sf-agent-topic.md       # Agent topic + action specification
@@ -54,11 +59,6 @@ my-salesforce-project/
 │       ├── querying-soql/          # SOQL query building
 │       ├── handling-sf-data/       # Data operations (import/export/upsert)
 │       └── ...                     # Full skill list in .claude/skills/
-├── .airules/                       # Supplemental rule sets read by skills
-│   ├── APEX_RULES.md               # Hard rules for Apex (governor limits, security)
-│   ├── MERMAID_DIAGRAMS.md         # Diagram standards
-│   ├── AGENT_SCRIPT.md             # Agent Script recipe conventions
-│   └── README_STRUCTURE.md        # README authoring standards
 ├── .vscode/
 │   └── settings.json               # Suppresses Apex LS errors in template files
 ├── config/
@@ -94,6 +94,7 @@ my-salesforce-project/
 When you open a new Claude Code session in this directory, it already behaves as a Salesforce architect without any prompting.
 
 **To customise for your project**, edit `CLAUDE.md` to add:
+
 - Your project name and current sprint
 - Naming conventions and class prefixes
 - Specific packages in use (e.g. fflib, TAF)
@@ -109,17 +110,17 @@ Skills are markdown files in `.claude/skills/` that contain detailed rules, work
 
 You do not invoke skills manually. Claude detects the intent and loads the right skill:
 
-| If you ask about... | Claude loads |
-|---|---|
-| "Write an Apex service class" | `generating-apex` |
-| "Write a test class for this" | `generating-apex-test` |
-| "Build an LWC component" | `generating-lwc-components` |
-| "Create a Flow" | `generating-flow` |
-| "Deploy this metadata" | `deploying-metadata` |
-| "Lint this Apex class" | `apex-lint` |
-| "Debug this Apex log" | `debugging-apex-logs` |
-| "Build an Agentforce agent" | `developing-agentforce` |
-| "Write a SOQL query" | `querying-soql` |
+| If you ask about...            | Claude loads                  |
+| ------------------------------ | ----------------------------- |
+| "Write an Apex service class"  | `generating-apex`             |
+| "Write a test class for this"  | `generating-apex-test`        |
+| "Build an LWC component"       | `generating-lwc-components`   |
+| "Create a Flow"                | `generating-flow`             |
+| "Deploy this metadata"         | `deploying-metadata`          |
+| "Lint this Apex class"         | `apex-lint`                   |
+| "Debug this Apex log"          | `debugging-apex-logs`         |
+| "Build an Agentforce agent"    | `developing-agentforce`       |
+| "Write a SOQL query"           | `querying-soql`               |
 | "Draw an architecture diagram" | `generating-mermaid-diagrams` |
 
 ### What a skill does
@@ -147,6 +148,7 @@ description: "One-line description of when Claude should load this skill."
 ---
 
 ## Workflow
+
 ...
 ```
 
@@ -158,19 +160,19 @@ Commands are slash commands that produce structured documents for specific deliv
 
 ### Available commands
 
-| Command | What it produces |
-|---|---|
-| `/sf-agentforce` | Full Agentforce technical design document (7 sections, client-ready) |
-| `/sf-agent-topic` | Agent topic + action specification for Einstein Copilot Studio |
-| `/sf-agent-prompt` | Prompt Builder template with merge field mapping and token budget |
-| `/sf-apex-review` | Apex code review — governor limits, CRUD/FLS, bulkification findings |
-| `/sf-apex-test` | Production-ready Apex test class with arrange/act/assert structure |
-| `/sf-data-model` | Data model schema with ERD, field definitions, and Data Cloud DMO mapping |
-| `/sf-deploy` | Deployment runbook with pre-deploy checklist and rollback plan |
-| `/sf-flow` | Flow design document with fault paths and governor limit notes |
-| `/sf-security` | Security model — OWD, permission sets, sharing rules |
-| `/sf-integration` | Integration design — REST/Platform Events, auth, error handling |
-| `/sf-soql-query` | Optimised SOQL with selectivity and index analysis |
+| Command            | What it produces                                                          |
+| ------------------ | ------------------------------------------------------------------------- |
+| `/sf-agentforce`   | Full Agentforce technical design document (7 sections, client-ready)      |
+| `/sf-agent-topic`  | Agent topic + action specification for Einstein Copilot Studio            |
+| `/sf-agent-prompt` | Prompt Builder template with merge field mapping and token budget         |
+| `/sf-apex-review`  | Apex code review — governor limits, CRUD/FLS, bulkification findings      |
+| `/sf-apex-test`    | Production-ready Apex test class with arrange/act/assert structure        |
+| `/sf-data-model`   | Data model schema with ERD, field definitions, and Data Cloud DMO mapping |
+| `/sf-deploy`       | Deployment runbook with pre-deploy checklist and rollback plan            |
+| `/sf-flow`         | Flow design document with fault paths and governor limit notes            |
+| `/sf-security`     | Security model — OWD, permission sets, sharing rules                      |
+| `/sf-integration`  | Integration design — REST/Platform Events, auth, error handling           |
+| `/sf-soql-query`   | Optimised SOQL with selectivity and index analysis                        |
 
 ### How to use a command
 
@@ -203,9 +205,13 @@ Create a `.md` file in `.claude/command/`. Follow the five-section structure use
 
 ```markdown
 ## Role/Persona
+
 ## Context
+
 ## Output Format
+
 ## Constraints
+
 ## Variables
 ```
 
@@ -224,6 +230,7 @@ This is the recommended workflow for delivering a Salesforce feature end-to-end 
 Use Claude to produce formal design documents before writing any code.
 
 **Data model first:**
+
 ```
 /sf-data-model
 
@@ -243,6 +250,7 @@ Lead, Contact, Account, Task
 ```
 
 **Then architecture:**
+
 ```
 /sf-agentforce
 
@@ -266,6 +274,7 @@ Claude saves both documents to `docs/` and uses them as context for every subseq
 With the design docs in place, ask Claude to build. Skills activate automatically.
 
 **Apex service layer:**
+
 ```
 Write a LeadQualificationService class that scores leads against BANT criteria.
 It will be called from a Queueable and must handle 200+ records.
@@ -273,12 +282,14 @@ Use the data model we just designed.
 ```
 
 Claude will:
+
 - Load `generating-apex` skill
 - Apply all governor limit, security, and bulkification rules from `CLAUDE.md` and `.airules/APEX_RULES.md`
 - Generate `LeadQualificationService.cls` + meta XML
 - Automatically generate `LeadQualificationServiceTest.cls`
 
 **LWC component:**
+
 ```
 Build an LWC component that displays a lead's BANT score with a progress bar.
 It should use a wire adapter to load the lead and fire a custom event when the score changes.
@@ -287,6 +298,7 @@ It should use a wire adapter to load the lead and fire a custom event when the s
 Claude loads `generating-lwc-components`, enforces SLDS and accessibility rules, and produces the full bundle including a Jest test.
 
 **Flow:**
+
 ```
 /sf-flow
 
@@ -301,6 +313,7 @@ with branching logic based on score thresholds.
 Run tests through Claude rather than switching to the terminal.
 
 **Generate test class for existing code:**
+
 ```
 /sf-apex-test
 
@@ -315,6 +328,7 @@ v62.0
 ```
 
 **Lint Apex before committing:**
+
 ```
 /apex-lint LeadQualificationService
 ```
@@ -322,6 +336,7 @@ v62.0
 Claude produces a table of CRITICAL / HIGH / MEDIUM issues with line numbers and fix suggestions.
 
 **Run tests against the org:**
+
 ```
 Run all tests in the LeadQualification namespace and show me coverage.
 ```
@@ -335,6 +350,7 @@ Claude executes `sf apex run test`, captures results, and flags any classes belo
 Generate a runbook, then deploy.
 
 **Deployment runbook:**
+
 ```
 /sf-deploy
 
@@ -356,6 +372,7 @@ Salesforce CLI — sf project deploy start
 ```
 
 **Execute the deployment:**
+
 ```
 Deploy the LeadQualification components to UAT. Run the pre-deploy checklist first.
 ```
@@ -368,10 +385,10 @@ Claude runs `sf project deploy start --dry-run`, checks the output, and then exe
 
 The Salesforce hosted MCP servers use different base URLs depending on which org type you are connecting to:
 
-| Org type | Base URL |
-| --- | --- |
-| Production / Developer Edition | `https://api.salesforce.com` |
-| Sandbox / Scratch org | `https://test.api.salesforce.com` |
+| Org type                       | Base URL                          |
+| ------------------------------ | --------------------------------- |
+| Production / Developer Edition | `https://api.salesforce.com`      |
+| Sandbox / Scratch org          | `https://test.api.salesforce.com` |
 
 `.mcp.json` is **gitignored** in this project. This is intentional — the URL is environment-specific and must not be overwritten by a `git pull`.
 
@@ -386,11 +403,13 @@ cp .mcp.json.example .mcp.json
 Then open `.mcp.json` and set the `url` field for each hosted MCP server to match your org type:
 
 **Sandbox / Scratch org:**
+
 ```json
 "url": "https://test.api.salesforce.com/platform/mcp/v1-beta.2/platform/salesforce-api-context"
 ```
 
 **Production / Developer Edition:**
+
 ```json
 "url": "https://api.salesforce.com/platform/mcp/v1-beta.2/platform/salesforce-api-context"
 ```
@@ -414,8 +433,12 @@ When you switch from sandbox to production (or vice versa), edit `.mcp.json` dir
 ```json
 {
   "permissions": {
-    "allow": ["Bash(sf apex run test*)", "Bash(sf project deploy start*)", "Read(**)"],
-    "deny":  ["Bash(git push --force*)", "Bash(rm -rf*)", "Bash(sf org delete*)"]
+    "allow": [
+      "Bash(sf apex run test*)",
+      "Bash(sf project deploy start*)",
+      "Read(**)"
+    ],
+    "deny": ["Bash(git push --force*)", "Bash(rm -rf*)", "Bash(sf org delete*)"]
   },
   "env": {
     "SF_API_VERSION": "62.0"
@@ -430,7 +453,11 @@ Pre-approves safe read and test commands. Permanently blocks destructive operati
 ```json
 {
   "permissions": {
-    "allow": ["Bash(sf org open*)", "Bash(sf org create scratch*)", "mcp__*__deploy_metadata"]
+    "allow": [
+      "Bash(sf org open*)",
+      "Bash(sf org create scratch*)",
+      "mcp__*__deploy_metadata"
+    ]
   },
   "env": {
     "SF_TARGET_ORG": "dev-scratch",
@@ -445,12 +472,12 @@ Personal org aliases and local-only permissions. Each developer maintains their 
 
 ## Quick Reference
 
-| Goal | How |
-|---|---|
-| Set Claude's persona and rules | Edit `CLAUDE.md` |
-| Add a repeatable document task | Add a file to `.claude/command/` |
-| Add deep domain logic | Add a folder + `SKILL.md` to `.claude/skills/` |
-| Pre-approve a CLI command | Add to `permissions.allow` in `.claude/settings.json` |
-| Set your local org alias | Set `SF_TARGET_ORG` in `.claude/settings.local.json` |
+| Goal                                              | How                                                            |
+| ------------------------------------------------- | -------------------------------------------------------------- |
+| Set Claude's persona and rules                    | Edit `CLAUDE.md`                                               |
+| Add a repeatable document task                    | Add a file to `.claude/command/`                               |
+| Add deep domain logic                             | Add a folder + `SKILL.md` to `.claude/skills/`                 |
+| Pre-approve a CLI command                         | Add to `permissions.allow` in `.claude/settings.json`          |
+| Set your local org alias                          | Set `SF_TARGET_ORG` in `.claude/settings.local.json`           |
 | Suppress VS Code Apex LS errors on template files | Already configured in `.vscode/settings.json` + `.forceignore` |
-| Store design docs | Claude saves them to `docs/` automatically via commands |
+| Store design docs                                 | Claude saves them to `docs/` automatically via commands        |
